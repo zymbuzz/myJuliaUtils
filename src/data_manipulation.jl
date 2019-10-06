@@ -17,8 +17,8 @@ function dataTransf(x::AbstractVecOrMat, transfId::Int)
 #   4. Seasonal difference in monthly data ((Y_{t})-(Y_{t-12}))
 #   5. Log-levels (Ln(Y_{t}))
 #   6. Log-First Difference (Ln(Y_{t})-Ln(Y_{t-1}))
-#   7. Seasonal difference in quarterly data (Ln(Y_{t})-Ln(Y_{t-4}))
-#   8. Seasonal difference in monthly data (Ln(Y_{t})-Ln(Y_{t-12}))
+#   7. Seasonal log difference in quarterly data (Ln(Y_{t})-Ln(Y_{t-4}))
+#   8. Seasonal log difference in monthly data (Ln(Y_{t})-Ln(Y_{t-12}))
 #   9. Detrending Ln(Y_{t}) by HP filter using quarterly data
 #   10. Detrending Ln(Y_{t}) by HP filter using monthly data
 #   11. Seasonal difference of a detrended Ln(Y_{t}) by HP filter using quarterly data
