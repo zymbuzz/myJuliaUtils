@@ -14,7 +14,7 @@ ismyapprox, normpdf, acf, decVCV, ols1, inbetween,
 # evalF.jl
 useN2fit, useMvN2fit,
 # data_manipulation.jl
-dataTransf
+dataTransf, detrend
 
 include("extfunc.jl");
 include("evalF.jl");
