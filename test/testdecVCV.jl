@@ -1,4 +1,4 @@
-using TVPVARPkg
+using myJuliaUtils
 using Test
 using LinearAlgebra
 using Random
@@ -10,7 +10,7 @@ n = round(Int, 2 + rand() * 100)
 qq = genPDmat(n)
 qq = vech(qq)
 
-A, sigma = TVPVARPkg.decVCV(qq)
+A, sigma = myJuliaUtils.decVCV(qq)
 
 @test vec2sym(qq) ≈ vec2ltriW1(A) * Diagonal(sigma).^2 * vec2ltriW1(A)'
 
@@ -26,13 +26,13 @@ for i = 1:T
     qq[:,i] = vech(q)
 end
 
-A, sigma = TVPVARPkg.decVCV(qq)
+A, sigma = myJuliaUtils.decVCV(qq)
 
 for i = 1:T
     @test vec2sym(qq[:,i]) ≈ vec2ltriW1(A[:,i]) * Diagonal(sigma[:,i]).^2 * vec2ltriW1(A[:,i])'
 end
 
-A, sigma = TVPVARPkg.decVCV(qq,true)
+A, sigma = myJuliaUtils.decVCV(qq,true)
 
 for i = 1:T
     @test vec2sym(qq[:,i]) != vec2ltriW1(A[:,i]) * Diagonal(sigma[:,i]).^2 * vec2ltriW1(A[:,i])'
