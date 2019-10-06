@@ -13,8 +13,5 @@ notifications:
   email: zymantasbud@gmail.com
   on_success: never
 
-script:
-  julia -e 'using Pkg; Pkg.add("Distributions"); Pkg.test("myJuliaUtils", coverage=true)'
-
-after_success:
-- julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())';
+# after_success:
+# - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())';
