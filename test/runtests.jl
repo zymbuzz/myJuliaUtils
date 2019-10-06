@@ -1,3 +1,5 @@
+println("Testing...")
+
 using myJuliaUtils
 using Test
 
@@ -8,5 +10,3 @@ using Test
 @time @testset "Testing ACF function" begin include("testAcf/testAcf.jl") end
 @time @testset "Testing decVCV function" begin include("testdecVCV.jl") end
 @time @testset "Testing the fitting of distributions" begin include("testFitDist.jl") end
-
-end
