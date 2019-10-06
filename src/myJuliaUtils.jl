@@ -12,10 +12,14 @@ lag0, eye, vech, vec2sym, vec2ltri, vec2ltriW1, stabcheck, stabcheckC, preparexy
 wish, iwish, cholPSD, randnPSD, genPSDmatStrict, genPDmat, genPSDmat, simMC, quantileArr, companionf, 
 ismyapprox, normpdf, acf, decVCV, ols1, inbetween,
 # evalF.jl
-useN2fit, useMvN2fit
+useN2fit, useMvN2fit,
+# data_manipulation.jl
+dataTransf
 
 include("extfunc.jl");
 include("evalF.jl");
+include("data_manipulation.jl");
+
 
 
 end # module
