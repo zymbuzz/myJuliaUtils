@@ -3,7 +3,7 @@ module myJuliaUtils
 using Random
 using LinearAlgebra
 using Statistics
-# using Distributions
+using Distributions
 
 export
 
