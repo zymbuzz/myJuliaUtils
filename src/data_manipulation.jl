@@ -24,7 +24,8 @@ function dataTransf(x::AbstractVecOrMat, transfId::Int)
 #   11. Seasonal difference of a detrended Ln(Y_{t}) by HP filter using quarterly data
 #   12. Seasonal difference of a detrended Ln(Y_{t}) by HP filter using monthly data
 #   13. Seasonal difference of a detrended Ln(Y_{t}) by removing a linear trend
-#   14. Detrended Ln(Y_{t}) by removing a linear trend (for already SA data)
+#   14. Detrended Y_{t} by removing a linear trend (for already SA data)
+#   15. Detrended Ln(Y_{t}) by removing a linear trend (for already SA data)
 #  =========================================================================
     y = similar(x)
 
@@ -71,12 +72,15 @@ function dataTransf(x::AbstractVecOrMat, transfId::Int)
         #     y(13:end,:)=yt(13:end,:)-yt(1:end-12,:);            
         #     n_loss=12;
     elseif transfId == 13
-            yt=log.(x);
-            yt=yt[13:end,:]-yt[1:end-12,:]           
-            y[14:end,:]=yt[2:end,:]-yt[1:end-1,:]
-            n_loss = 13;
+        yt = log.(x)
+        yt = yt[13:end,:] - yt[1:end - 12,:]           
+        y[14:end,:] = yt[2:end,:] - yt[1:end - 1,:]
+        n_loss = 13
     elseif transfId == 14
-        y = detrend(log.(x));
+        y = detrend(x)
+        n_loss = 0 
+    elseif transfId == 15
+        y = detrend(log.(x))
         n_loss = 0 
     else
         error("Please specify a valid transformation index")
