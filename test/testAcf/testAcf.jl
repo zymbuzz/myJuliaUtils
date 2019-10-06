@@ -1,4 +1,4 @@
-using TVPVARPkg
+using myJuliaUtils
 using Test
 using LinearAlgebra
 using DelimitedFiles
