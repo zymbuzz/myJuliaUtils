@@ -1,7 +1,7 @@
 function dataTransf(x::AbstractVecOrMat, transfId::Vector{Int})
     y = similar(x)
-    n_loss = 0;
-    for i = 1:length(transfId)
+    n_loss = 0
+    for i = 1:size(x, 2)
         (y[:,i], n_loss_temp) = dataTransf(x[:,i], transfId[i])
         n_loss = max(n_loss, n_loss_temp)
     end
@@ -70,17 +70,30 @@ function dataTransf(x::AbstractVecOrMat, transfId::Int)
         #     yt=log(x)-yt;
         #     y(13:end,:)=yt(13:end,:)-yt(1:end-12,:);            
         #     n_loss=12;
-        # case 11
-        #     yt=log(x);
-        #     yt=yt(13:end,:)-yt(1:end-12,:);            
-        #     y(14:end,:)=yt(2:end,:)-yt(1:end-1,:);
-        #     n_loss=13;
-        # case 12
-        #     y=detrend(log(x));
-        #     n_loss = 0 
+    elseif transfId == 13
+            yt=log.(x);
+            yt=yt[13:end,:]-yt[1:end-12,:]           
+            y[14:end,:]=yt[2:end,:]-yt[1:end-1,:]
+            n_loss = 13;
+    elseif transfId == 14
+        y = detrend(log.(x));
+        n_loss = 0 
     else
         error("Please specify a valid transformation index")
     end
 
     return (y = y, n_loss = n_loss)
+end
+
+function detrend(y::AbstractVecOrMat;power::Int = 1)
+    T = size(y, 1)
+    X = similar(y, T, power + 1)
+    X[:,1] = ones(T)
+    if power > 0
+        for i = 1:power
+            X[:,i + 1] = collect(1:T).^i
+        end
+    end
+    b = X \ y
+    return y - X * b
 end

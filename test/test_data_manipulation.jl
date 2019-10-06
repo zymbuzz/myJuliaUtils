@@ -1,5 +1,6 @@
 using Test
 using myJuliaUtils
+using Statistics
 
 T = 100;
 K = rand(1:20);
@@ -20,3 +21,16 @@ x = abs.(randn(T, K))
     @test b1 == b2
     @test a1[b1 + 1:end,:] == a2[b2 + 1:end,:]
 end
+
+T = 100;
+K = rand(1:20);
+x = abs.(randn(T, K))
+T = size(x, 1)
+
+@testset "testing detrend functions" begin
+    @test detrend(x, power = 0) ≈ x .- mean(x, dims = 1)
+end
+
+
+
+
