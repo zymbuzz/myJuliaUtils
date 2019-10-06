@@ -2,6 +2,7 @@ using myJuliaUtils
 using Test
 using LinearAlgebra
 using DelimitedFiles
+using Statistics
 
 # Testing both lag functions
 @testset "testing lag functions" begin
