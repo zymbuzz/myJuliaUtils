@@ -77,10 +77,10 @@ function dataTransf(x::AbstractVecOrMat, transfId::Int)
         y[14:end,:] = yt[2:end,:] - yt[1:end - 1,:]
         n_loss = 13
     elseif transfId == 14
-        y = detrend(x)
+        y = detrend(x, power=1)
         n_loss = 0 
     elseif transfId == 15
-        y = detrend(log.(x))
+        y = detrend(log.(x), power=1)
         n_loss = 0 
     else
         error("Please specify a valid transformation index")
