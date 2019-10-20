@@ -14,5 +14,5 @@ notifications:
   email: zymantasbud@gmail.com
   on_success: never
 
-# after_success:
-# - julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())';
+after_success:
+- julia -e 'using Pkg; Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())';
