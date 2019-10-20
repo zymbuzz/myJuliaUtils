@@ -435,6 +435,17 @@ function ols1(y::AbstractVector, x::AbstractMatrix)
     return (nobs = nobs, nvar = nvar, bhat = bhat, yhat = yhat, res = res, sig2hat = sig2hat, sigbhat = sigbhat, R2 = R2)
 end
 
+function VARols1(data::AbstractVecOrMat{Float64}, cnst::Bool, P::Int)
+    y, x = preparexy(data, P, cnst)
+    nobs, nvar = size(x)
+    bhat = x \ y
+    yhat = x * bhat
+    res = y - yhat
+    sig2hat = (res'res) / (nobs - nvar)
+    
+    return (nobs = nobs, nvar = nvar, bhat = bhat, yhat = yhat, res = res, sig2hat = sig2hat)
+end
+
 function nanmean(x::AbstractArray{T}) where T <: AbstractFloat
     sum = zero(eltype(x))
     count = 0
