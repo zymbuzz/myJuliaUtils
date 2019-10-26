@@ -288,3 +288,11 @@ end
 end
 
 
+@testset "testing sumsqr" begin
+    a = randn(rand(1:100))
+    @test sumsqr(a) == a'a
+    @test sumsqr(a) == sum(a.^2)
+
+    a = randn(rand(1:100),rand(1:100))
+    @test sumsqr(a) ≈ sum(a.^2)
+end

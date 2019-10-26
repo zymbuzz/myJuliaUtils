@@ -161,6 +161,10 @@ function preparexy(data::AbstractMatrix, p::Int, c::Bool = false)
     return Y, X
 end
 
+function sumsqr(a::AbstractArray)
+    return mapreduce(x->x^2,+,a)
+end
+
 # function wish(h, n::Int)
 #     A = cholesky!(h).L * randn(size(h, 1), n)
 #     A = A * A'
