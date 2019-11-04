@@ -18,6 +18,6 @@ for i = 1:K
 end
 lambbdaMean ./= K
 
-@test isapprox(lambbdaMean, lammbda, atol = 0.001)
+@test isapprox(lambbdaMean, lammbda, atol = 0.01)
 
 end
