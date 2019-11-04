@@ -14,11 +14,14 @@ ismyapprox, normpdf, acf, decVCV, ols1, VARols1, inbetween,
 # evalF.jl
 useN2fit, useMvN2fit,
 # data_manipulation.jl
-dataTransf, detrend
+dataTransf, detrend,
+# generate.jl
+genLPM
 
 include("extfunc.jl");
 include("evalF.jl");
 include("data_manipulation.jl");
+include("generate.jl");
 
 
 
