@@ -274,15 +274,6 @@ function randnPSD(mu::AbstractVector{T}, sigma::AbstractMatrix{T})::Array{T}  wh
     return draw
 end
 
-function simMC(PI::Array{Float64,2}, T::Int, S0::Int = 1)
-    S  = [S0] # fix starting point
-    cumPI = cumsum(PI;dims = 2)
-    for i = 2:T
-        push!(S, sum(rand() .> cumPI[S[i - 1], :]) + 1);
-    end
-    return S
-end
-
 function mcSS(PI::Matrix)
     a = eigen(Matrix(PI'))
     b = a.vectors[:,a.values .≈ 1.]

@@ -177,33 +177,6 @@ end
     @test stabcheckC([1 randn()], 1, 1, true) == true
 end
 
-# testing simMC [to add more tests]
-
-noStates = round(Int, 2 + rand() * 50)
-S0 = floor(Int, 1 + rand() * noStates)
-PI = eye(noStates)
-T = 100
-
-@test all(simMC(PI, T, S0) .== S0)
-
-noStates = round(Int, 2 + rand() * 20)
-S0 = floor(Int, 1 + rand() * noStates)
-
-A = randn(noStates, noStates)
-A = abs.(A)
-A = A ./ sum(A;dims = 2)
-B = copy(A)
-A[end,:] = [zeros(1, noStates - 1) 1]
-B[1,:] = [1 zeros(1, noStates - 1)]
-
-F = simMC(A, 1000, S0)
-@test F[end] == noStates
-@test F[1] == S0
-
-F = simMC(B, 1000, S0)
-@test F[end] == 1
-@test F[1] == S0
-
 
 # test for normal pdf
 x = [-2.,-1.,0.,1.,2.]
@@ -217,7 +190,6 @@ y2 = [0.000133830225764885, 0.00443184841193801, 0.0539909665131881, 0.241970724
     @test normpdf.(x) ≈ y1
     @test normpdf.(x, mu, sigma) ≈ y2
 end
-
 
 
 # testing ols function
