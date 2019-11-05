@@ -15,6 +15,11 @@ using Statistics
     @time for i = 1:K
         y .= genLPM(lammbda, T, X)
         lambbdaMean .+= X \ y
+
+        if mod(K,10000)==0
+            println("keep")
+        end
+
     end
     lambbdaMean ./= K
 
