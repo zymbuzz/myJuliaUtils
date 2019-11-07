@@ -336,9 +336,7 @@ function quantileArr(v::AbstractArray{T,3}, p, dms::Int = 1) where {T}
     return A
 end
 
-function ismyapprox(a, b, dgts::Int)
-    maximum(abs.(round.(a - b, digits = dgts))) == 0
-end
+ismyapprox(a, b, dgts::Int) = isapprox(a, b, atol = dgts)
 
 function normpdf(x::Float64, mu::Float64 = 0.0, sigma::Float64 = 1.0)
     return exp(-0.5 * ((x - mu) ./ sigma).^2) ./ (sqrt(2. * pi) .* sigma)

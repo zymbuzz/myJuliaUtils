@@ -16,7 +16,7 @@ using Statistics
         y .= genLPM(lammbda, T, X)
         lambbdaMean .+= X \ y
 
-        if mod(K,10000)==0
+        if mod(K,100000)==0
             println("keep")
         end
 
