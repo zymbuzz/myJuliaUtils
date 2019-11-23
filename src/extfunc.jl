@@ -162,7 +162,7 @@ function preparexy(data::AbstractMatrix, p::Int, c::Bool = false)
 end
 
 function sumsqr(a::AbstractArray)
-    return mapreduce(x->x^2,+,a)
+    return mapreduce(x->x^2, +, a)
 end
 
 # function wish(h, n::Int)
@@ -281,12 +281,12 @@ function mcSS(PI::Matrix)
 end
 
 function mcSS2(PI::Matrix, tol::Float64 = eps())
-    l= size(PI, 1)
-    q = ones(l)./l
+    l = size(PI, 1)
+    q = ones(l) ./ l
     q1 = similar(q)
     a = 2.
     while a > tol
-        q1 .= PI'*q
+        q1 .= PI' * q
         a = maximum(abs, q1 .- q)
         q .= q1
     end
@@ -453,6 +453,12 @@ end
 
 nanmean(x::AbstractArray, y::Int) = mapslices(nanmean, x; dims = y)
 
-function inbetween(a::Matrix,b::AbstractArray{T,3})  where {T}
-    return (view(b,:,:,1) .<= a) .& (a.<= view(b,:,:,2))
+function inbetween(a::Matrix, b::AbstractArray{T,3})  where {T}
+    return (view(b, :, :, 1) .<= a) .& (a .<= view(b, :, :, 2))
+end
+
+"The function multiplies matrices A and B and extracts the diagonal to a prealoccated vector v"
+function getmultdiag!(v::Vector, A::Matrix, B::Matrix)
+    v .= dot.(eachrow(A), eachcol(B))
+    return nothing
 end

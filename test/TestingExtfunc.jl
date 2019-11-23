@@ -268,3 +268,14 @@ end
     a = randn(rand(1:100),rand(1:100))
     @test sumsqr(a) ≈ sum(a.^2)
 end
+
+@testset "testing getmultdiag!" begin
+    n = rand(1:100)
+    A = rand().+randn(n, n)
+    B = rand().+randn(n, n)
+    v = similar(A, n)
+
+    getmultdiag!(v,A,B)
+
+    @test v ≈ diag(A*B)
+end
