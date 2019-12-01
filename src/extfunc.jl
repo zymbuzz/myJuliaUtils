@@ -462,3 +462,13 @@ function getmultdiag!(v::Vector, A::Matrix, B::Matrix)
     v .= dot.(eachrow(A), eachcol(B))
     return nothing
 end
+
+"the function that transforms the value from domain (min,max) to range with minus/plus infinity"
+function transf1To(a::Float64, minn::Float64, maxx::Float64)
+   return -log((maxx - a) ./ (a - minn))
+end
+
+"the function that transforms the value back from minus/plus infinity  to range with domain (min,max)"
+function transf1Back(a::Float64, minn::Float64, maxx::Float64)
+    return minn + (maxx - minn) / (1. + exp(-a))
+end

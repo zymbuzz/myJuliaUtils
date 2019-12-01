@@ -265,17 +265,31 @@ end
     @test sumsqr(a) ≈ a'a
     @test sumsqr(a) ≈ sum(a.^2)
 
-    a = randn(rand(1:100),rand(1:100))
+    a = randn(rand(1:100), rand(1:100))
     @test sumsqr(a) ≈ sum(a.^2)
 end
 
 @testset "testing getmultdiag!" begin
     n = rand(1:100)
-    A = rand().+randn(n, n)
-    B = rand().+randn(n, n)
+    A = rand() .+ randn(n, n)
+    B = rand() .+ randn(n, n)
     v = similar(A, n)
 
-    getmultdiag!(v,A,B)
+    getmultdiag!(v, A, B)
 
-    @test v ≈ diag(A*B)
+    @test v ≈ diag(A * B)
 end
+
+@testset "testing transf1" begin
+    a = transf1To(0.2, 0., 1.)
+    @test 0.2 ≈ transf1Back(a, 0., 1.)
+
+    n = rand(1:100)
+    a = randn(n)
+    aup = a .+ abs.(randn(n))
+    adown = a .- abs.(randn(n))
+
+    b = transf1To.(a, adown, aup)
+    @test a ≈ transf1Back.(b, adown, aup)
+end
+
