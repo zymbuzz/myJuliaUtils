@@ -293,3 +293,22 @@ end
     @test a ≈ transf1Back.(b, adown, aup)
 end
 
+@testset "testing regMat2PD!" begin
+
+    for i = 1:100
+        a = genPDmat()
+        b = copy(a)
+        regMat2PD!(a)
+
+        @test a ≈ b
+    end
+
+    for i = 1:100
+        n = rand(1:100)
+        a = randn(n, n)
+        regMat2PD!(a)
+
+        @test isposdef(a)
+    end
+
+end

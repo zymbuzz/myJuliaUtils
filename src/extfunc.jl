@@ -252,6 +252,14 @@ function cholPSD(A::AbstractMatrix{T})::Array{T,2}  where {T <: AbstractFloat}
     end
 end
 
+
+"the function regularises the matrix to be positive definite given that there are no eigenvalues of zeros"
+function regMat2PD!(A::Matrix)
+    D, U = eigen(A)
+    A .= Symmetric(U * Diagonal(abs.(D)) * U')
+    return nothing
+end
+
 function randnPSD(mu::AbstractMatrix{T}, sigma::AbstractMatrix{T})::Array{T}  where {T <: AbstractFloat}
     # input:
     # mu is row vector
