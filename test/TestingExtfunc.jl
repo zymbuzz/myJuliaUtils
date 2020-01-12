@@ -301,6 +301,7 @@ end
         regMat2PD!(a)
 
         @test a ≈ b
+        @test isapprox(a,b; atol=1e-10)
     end
 
     for i = 1:100
