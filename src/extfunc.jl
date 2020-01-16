@@ -467,7 +467,9 @@ end
 
 "The function multiplies matrices A and B and extracts the diagonal to a prealoccated vector v"
 function getmultdiag!(v::Vector, A::Matrix, B::Matrix)
-    v .= dot.(eachrow(A), eachcol(B))
+    # v .= dot.(eachrow(A), eachcol(B))
+    tmp = A .* B'
+    sum!(result, tmp)
     return nothing
 end
 

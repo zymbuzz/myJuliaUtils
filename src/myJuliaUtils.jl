@@ -23,6 +23,4 @@ include("evalF.jl");
 include("data_manipulation.jl");
 include("generate.jl");
 
-
-
 end # module
