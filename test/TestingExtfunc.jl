@@ -304,12 +304,4 @@ end
         @test isapprox(a,b; atol=1e-10)
     end
 
-    for i = 1:100
-        n = rand(1:100)
-        a = randn(n, n)
-        regMat2PD!(a)
-
-        @test isposdef(a)
-    end
-
 end

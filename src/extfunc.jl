@@ -198,19 +198,19 @@ function genPSDmat(K::Int = rand(2:9))
     return A'A
 end
 
-function genPSDmatStrict(K::Int = rand(2:9))
+function genPSDmatStrict(K::Int = rand(2:9); no::Int = rand(1:K-1))
     A = randn(K, K)
     A = A'A
     vals, vecs = eigen(A)
-    vals[1] = 0.
+    vals[1:no] .= 0.
     return vecs * Diagonal(vals) * vecs'
 end
 
 function genPDmat(K::Int = rand(2:9))
     A = zeros(K, K)
     while isposdef(A) == false
-        A = randn(K, K)
-        A = A'A
+        A .= randn(K, K)
+        A .= A'A
     end
     return A
 end
