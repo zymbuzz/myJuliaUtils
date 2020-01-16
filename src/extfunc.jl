@@ -469,7 +469,7 @@ end
 function getmultdiag!(v::Vector, A::Matrix, B::Matrix)
     # v .= dot.(eachrow(A), eachcol(B))
     tmp = A .* B'
-    sum!(result, tmp)
+    sum!(v, tmp)
     return nothing
 end
 
