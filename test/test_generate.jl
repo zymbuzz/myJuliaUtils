@@ -6,7 +6,7 @@ using Statistics
 
 @testset "testing genLPM function - Monte Carlo test" begin
     T = 10000
-    K = 200000
+    K = 400000
     X = [ones(T) randn(T)];
     lammbda = [rand(),randn() / 10.]
 
