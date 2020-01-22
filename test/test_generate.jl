@@ -16,7 +16,7 @@ using Statistics
         y .= genLPM(lammbda, T, X)
         lambbdaMean .+= X \ y
 
-        if mod(i,100000)==0
+        if mod(i, 100000) == 0
             println("keep")
         end
 
@@ -34,7 +34,7 @@ end
     PI = eye(noStates)
     T = 100
 
-    @test all(simMC(PI, T, S0=S0) .== S0)
+    @test all(simMC(PI, T, S0 = S0) .== S0)
 
     noStates = round(Int, 2 + rand() * 20)
     S0 = floor(Int, 1 + rand() * noStates)
@@ -46,11 +46,11 @@ end
     A[end,:] = [zeros(1, noStates - 1) 1]
     B[1,:] = [1 zeros(1, noStates - 1)]
 
-    F = simMC(A, 1000, S0=S0)
+    F = simMC(A, 1000, S0 = S0)
     @test F[end] == noStates
     @test F[1] == S0
 
-    F = simMC(B, 1000, S0=S0)
+    F = simMC(B, 1000, S0 = S0)
     @test F[end] == 1
     @test F[1] == S0
 end
