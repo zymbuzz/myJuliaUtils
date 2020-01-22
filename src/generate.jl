@@ -5,7 +5,7 @@ function genLPM(lammbda::AbstractVector, T::Int, X::AbstractMatrix)
 
     y = BitArray(undef, T)
     for i = 1:T
-        y[i] = dot(X[i,:], lammbda) > rand()
+        y[i] = dot(X[i,:], lammbda) > randn()
     end
 
     return y
