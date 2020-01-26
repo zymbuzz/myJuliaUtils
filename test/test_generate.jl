@@ -1,7 +1,6 @@
 using myJuliaUtils
 using Test
 using LinearAlgebra
-using DelimitedFiles
 using Statistics
 
 @testset "testing genLPM function - Monte Carlo test" begin
