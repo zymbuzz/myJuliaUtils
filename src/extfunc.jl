@@ -493,11 +493,11 @@ function split_data(df, at = 0.70)
 end
 
 "A handy helper function to standardize the data"
-function standardize(x;dims::Integer=1)
+function standardize(x;dims::Int=1)
     return (x .- mean(x, dims=dims)) ./ std(x, dims=dims), x
 end
 
 "A handy helper function to unstandardize the data"
-function unstandardize(x, orig;dims=1)
+function unstandardize(x, orig;dims::Int=1)
     return (x .+ mean(orig, dims=dims)) .* std(orig, dims=dims)
 end
