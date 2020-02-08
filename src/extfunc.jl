@@ -482,3 +482,22 @@ end
 function transf1Back(a::Float64, minn::Float64, maxx::Float64)
     return minn + (maxx - minn) / (1. + exp(-a))
 end
+
+"Function to split samples." 
+function split_data(df, at = 0.70)
+    r = size(df,1)
+    index = Int(round(r * at))
+    train = df[1:index, :]
+    test  = df[(index+1):end, :]
+    return train, test
+end
+
+"A handy helper function to standardize the data"
+function standardize(x;dims::Integer=1)
+    return (x .- mean(x, dims=dims)) ./ std(x, dims=dims), x
+end
+
+"A handy helper function to unstandardize the data"
+function unstandardize(x, orig;dims=1)
+    return (x .+ mean(orig, dims=dims)) .* std(orig, dims=dims)
+end
