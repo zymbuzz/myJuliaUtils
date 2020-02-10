@@ -8,7 +8,7 @@ using Distributions
 export
 
 # extfunc.jl
-lag0, eye, vech, vec2sym, vec2ltri, vec2ltriW1, stabcheck, stabcheckC, preparexy, sumsqr, nanmean,
+lag0, eye, vech, vechRshp, vec2sym, vec2ltri, vec2ltriW1, stabcheck, stabcheckC, preparexy, sumsqr, nanmean,
 wish, iwish, cholPSD, regMat2PD!, randnPSD, genPSDmatStrict, genPDmat, genPSDmat, quantileArr, companionf, 
 ismyapprox, normpdf, acf, decVCV, ols1, VARols1, inbetween, getmultdiag!,transf1To,transf1Back,split_data,standardize,unstandardize,
 # evalF.jl

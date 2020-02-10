@@ -32,6 +32,11 @@ function vech(A::AbstractArray{T,3}, k::Int = 0) where {T}
     return B
 end
 
+function vechRshp(A::AbstractArray{T,3}, k::Int = 0) where {T}
+    a = size(A, 3)
+    return reshape(vech(A,k),(:,a))
+end
+
 # this one is type unstable
 function vec2ltri2(v::AbstractVector)
     n = length(v)

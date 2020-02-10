@@ -2,10 +2,10 @@ using myJuliaUtils
 using Test
 using LinearAlgebra
 
-randomdim = rand(1:20)
+randomdim = rand(1:10)
 c = Int(randomdim * (randomdim + 1) / 2)
 a = randn(c)
-b = vec2sym(a)
+b = @inferred vec2sym(a)
 @test a == vech(b)
 b = vec2ltri(a)
 @test a == vech(b)
@@ -54,7 +54,7 @@ A = [1.0  0.0  0.0  0.0;
 randomdim = Int(ceil.(rand() * 20)) + 1
 c = Int(randomdim * (randomdim - 1) / 2)
 a = randn(c)
-b = vec2ltriW1(a)
+b = @inferred vec2ltriW1(a)
 @test a == vech(b, -1)
 
 # testing the length of results to be all fine
@@ -75,3 +75,15 @@ a = randn(randomdim, randomdim)
 @test length(vech(a, -1)) == c
 
 
+# testing vechRshp
+N=rand(1:20)
+b=randn(N,N,N);
+for i=1:N
+    b[:,:,i]=genPSDmat(N)
+end
+
+A=@inferred vechRshp(b)
+@test A[:,end]==vech(b[:,:,end])
+@test A[:,1]==vech(b[:,:,1])
+c=rand(1:N)
+@test A[:,c]==vech(b[:,:,c])
