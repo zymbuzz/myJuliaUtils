@@ -4,6 +4,7 @@ using Random
 using LinearAlgebra
 using Statistics
 using Distributions
+using StatsBase: counts, Histogram, fit
 
 export
 
@@ -12,7 +13,7 @@ lag0, eye, vech, vechRshp, vec2sym, vec2ltri, vec2ltriW1, stabcheck, stabcheckC,
 wish, iwish, cholPSD, regMat2PD!, randnPSD, genPSDmatStrict, genPDmat, genPSDmat, quantileArr, companionf, 
 ismyapprox, normpdf, acf, decVCV, ols1, VARols1, inbetween, getmultdiag!,transf1To,transf1Back,split_data,standardize,unstandardize,
 # evalF.jl
-useN2fit, useMvN2fit,
+useN2fit, useMvN2fit, pspit,
 # data_manipulation.jl
 dataTransf, detrend,
 # generate.jl
