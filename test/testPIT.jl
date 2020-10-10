@@ -1,8 +1,8 @@
 # testing PIT calculation
 using myJuliaUtils
-using StatsBase
+# using StatsBase
 using Test
-using BenchmarkTools
+# using BenchmarkTools
 
 
 a = randn(10, 10000)
