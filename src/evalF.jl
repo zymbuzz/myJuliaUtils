@@ -130,3 +130,25 @@ function pspit(forecasts::Matrix, obs::Vector; zsignif::Float64 = 0.95, nbins::I
     return (z=z, zhist=h, confmean= meanheight)
 
 end
+
+"PSCRPS Calculate Continuous-Ranked Probability Score.
+   CRPS = PSCRPS(FORECAST, OBS) obtains the CRPS for a given vector of
+   observations in OBS, with associated empirical probability forecasts
+   given in the matrix FORECASTS. Each row of FORECASTS contains an
+   empirical distribution for each element of OBS. Output parameter is the
+   CRPS value."
+function pscrps(forecasts::Matrix, obs::Vector)
+    N = length(obs)
+    M, S = size(forecasts)
+
+    @assert M == N "Length of OBS must match number of rows in FORECASTS"
+
+    crps_individual = similar(obs)
+    for i = 1:N
+        crps1 = mean(abs.(forecasts[i, :] .- obs[i]))
+        crps2 = mean(abs.(diff(forecasts[i, randperm(S)])))
+        crps_individual[i] = crps1 - 0.5 * crps2
+    end
+    crps = mean(crps_individual)
+    return (crps = crps, crps_individual = crps_individual)
+end

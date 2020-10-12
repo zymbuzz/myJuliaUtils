@@ -35,3 +35,8 @@ Q = pspit(a, b, nbins = nbins)
 # using DelimitedFiles
 # AAA=readdlm("/Users/zymantas/Downloads/testPIT.txt", ',');
 # pspit(AAA[:,1:end-1], AAA[:,end])
+
+a = randn(100, 10000)
+b = zeros(100)
+Q = pscrps(a, b)
+@test length(Q.crps_individual) == length(b)
