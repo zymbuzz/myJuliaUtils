@@ -34,7 +34,7 @@ end
 
 function vechRshp(A::AbstractArray{T,3}, k::Int = 0) where {T}
     a = size(A, 3)
-    return reshape(vech(A,k),(:,a))
+    return reshape(vech(A, k), (:, a))
 end
 
 # this one is type unstable
@@ -51,7 +51,7 @@ function vec2ltri(v::AbstractVector)
     @assert s * (s + 1) / 2 == n "length of vector is not triangular"
     A = zeros(eltype(v), s, s)
     k = 0
-    for j = 1:s, i = j:s
+    for j in 1:s, i in j:s
         k += 1
         A[i,j] = v[k]
     end
@@ -65,14 +65,14 @@ function vec2ltriW1(v::AbstractVector{T}, dm::Int = 1)::Array{T,2} where {T}
     A = Matrix{T}(I, s, s)
     k = 0
     if dm == 1
-        for j = 1:s, i = j:s
+        for j in 1:s, i in j:s
             if i > j
                 k += 1  
                 A[i,j] = v[k]
             end
         end
     elseif dm == 2
-        for i = 1:s, j = 1:i
+        for i in 1:s, j in 1:i
             if i > j
                 k += 1  
                 A[i,j] = v[k]
@@ -167,7 +167,7 @@ function preparexy(data::AbstractMatrix, p::Int, c::Bool = false)
 end
 
 function sumsqr(a::AbstractArray)
-    return mapreduce(x->x^2, +, a)
+    return mapreduce(x -> x^2, +, a)
 end
 
 # function wish(h, n::Int)
@@ -203,7 +203,7 @@ function genPSDmat(K::Int = rand(2:9))
     return A'A
 end
 
-function genPSDmatStrict(K::Int = rand(2:9); no::Int = rand(1:K-1))
+function genPSDmatStrict(K::Int = rand(2:9); no::Int = rand(1:K - 1))
     A = randn(K, K)
     A = A'A
     vals, vecs = eigen(A)
@@ -250,7 +250,7 @@ function cholPSD(A::AbstractMatrix{T})::Array{T,2}  where {T <: AbstractFloat}
         # C = Diagonal(sqrt.(D1)) * U[:, D .> tol]';
 
         # return Diagonal(sqrt.(filter(z -> z > tol, D))) * U[:, D .> tol]'
-        cord = findall(z->z > tol, D)
+        cord = findall(z -> z > tol, D)
         # return Diagonal(sqrt.(filter(z -> z > tol, D))) * U[:, findall(z -> z > tol, D)]'
         return Diagonal(sqrt.(D[cord])) * U[:, cord]'
 
@@ -331,17 +331,17 @@ function quantileArr(v::AbstractArray{T,3}, p, dms::Int = 1) where {T}
 
     if dms == 1
         A = similar(v, w, b, c)
-        for i = 1:b, j = 1:c
+        for i in 1:b, j in 1:c
             A[:,i,j] = quantile(v[:,i,j], p)
         end
     elseif dms == 2
         A = similar(v, a, w, c)
-        for i = 1:a, j = 1:c
+        for i in 1:a, j in 1:c
             A[i,:,j] = quantile(v[i,:,j], p)
         end
     elseif dms == 3
         A = similar(v, a, b, w)
-        for i = 1:a, j = 1:b
+        for i in 1:a, j in 1:b
             A[i,j,:] = quantile(v[i,j,:], p)
         end
     end
@@ -490,19 +490,26 @@ end
 
 "Function to split samples." 
 function split_data(df, at = 0.70)
-    r = size(df,1)
+    r = size(df, 1)
     index = Int(round(r * at))
     train = df[1:index, :]
-    test  = df[(index+1):end, :]
+    test  = df[(index + 1):end, :]
     return train, test
 end
 
-"A handy helper function to standardize the data"
-function standardize(x;dims::Int=1)
-    return (x .- mean(x, dims=dims)) ./ std(x, dims=dims), x
+    "A handy helper function to standardize the data"
+function standardize(x;dims::Int = 1)
+    return (x .- mean(x, dims = dims)) ./ std(x, dims = dims), x
 end
 
 "A handy helper function to unstandardize the data"
-function unstandardize(x, orig;dims::Int=1)
-    return (x .+ mean(orig, dims=dims)) .* std(orig, dims=dims)
+function unstandardize(x, orig;dims::Int = 1)
+    return (x .+ mean(orig, dims = dims)) .* std(orig, dims = dims)
+end
+
+"a function that prints the loop progress"
+function showprog(iter::Int, Nreps::Int; it_print::Int = floor(Nreps / iter))
+    if mod(iter, it_print) == 0
+        println("Iter: $iter / $Nreps ")
+    end
 end
